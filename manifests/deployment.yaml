@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ry-ta2647-nextproject-deployment
+  labels:
+    app: ry-ta2647-nextproject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ry-ta2647-nextproject
+  template:
+    metadata:
+      labels:
+        app: ry-ta2647-nextproject
+    spec:
+      containers:
+        - name: ry-ta2647-nextproject-container
+          image: pipejet/ry-ta2647-nextproject:0
+          ports:
+            - containerPort: 3000
