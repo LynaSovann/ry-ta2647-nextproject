@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ry-ta2647-nextproject-https-ingress
+  namespace: ry-ta2647-nextproject
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - ry-ta2647-nextproject.assessify.org
+      secretName: ry-ta2647-nextproject-secret-tls
+  rules:
+    - host: ry-ta2647-nextproject.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ry-ta2647-nextproject-service
+                port:
+                  number: 8175
